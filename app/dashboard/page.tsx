@@ -1,4 +1,3 @@
-import Image from "next/image";
 const Dashboard: React.FC = () => {
 
     return (
