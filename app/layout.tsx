@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "@/component/Navbar";
-import Loader from "@/component/Loader";
 import { Toaster } from "react-hot-toast";
 import { AppProvider } from "@/context/AppProvider";
 export const metadata: Metadata = {
