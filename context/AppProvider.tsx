@@ -14,7 +14,8 @@ interface AppProviderType {
     email: string,
     password: string,
     password_confirmation: string
-  ) => Promise<void>;
+    ) => Promise<void>;
+    logout: () => void;
 }
 const AppContext = createContext<AppProviderType | undefined>(undefined);
 const API_URL = `${process.env.NEXT_PUBLIC_API_URL}`;
@@ -74,15 +75,22 @@ export const AppProvider=({
                 password,
                 password_confirmation
             });
-            console.log("Registration successful:", response);
+            toast.success(response.data.message);
         } catch (error) {
             console.log("Registration failed:", error);
         } finally {
             setIsLoading(false);
         }
     }
+    const logout = () => {
+        setAuthToken(null);
+        Cookies.remove("authToken");
+        setIsLoading(false);
+        toast.success("Logout successful!");
+        router.push("/auth");
+    }
     return (
-      <AppContext.Provider value={{ login, register, isLoading, authToken }}>
+      <AppContext.Provider value={{ login, register, isLoading, authToken, logout }}>
         {isLoading ? <Loader /> : children}
       </AppContext.Provider>
     );
